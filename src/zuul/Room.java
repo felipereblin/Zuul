@@ -18,8 +18,9 @@ import java.util.HashMap;
  */
 public class Room 
 {
-    public String description;
+    private String description;
     private HashMap<String, Room> exists;
+    private Item item;
 
     /**
      * Create a room described "description". Initially, it has
@@ -31,6 +32,16 @@ public class Room
     {
         this.description = description;
         exists = new HashMap<>();
+        this.item = null;
+    }
+    
+    public Room(String description, Item item){
+        this(description);
+        this.item = item;
+    }
+    
+    public void setItem(Item item){
+        this.item = item;
     }
 
     /**
@@ -73,7 +84,12 @@ public class Room
     }
     
     public String getLongDescription(){
+        String itemStr = (item != null) 
+                ? "Que contém " + item.getDescription() 
+                : "";
+        
         return "Você está " + description + ".\n" + 
+                itemStr + 
                 getExitString();
     }
     

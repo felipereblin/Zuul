@@ -25,13 +25,19 @@ public class Game
     private void createRooms()
     {
         Room outside, theatre, pub, lab, office;
+        Item table, chair, tv;
       
+        //create itens
+        table = new Item("uma mesa", 50);
+        chair = new Item("uma cadeira", 20);
+        tv = new Item("uma TV", 15);
+        
         // create the rooms
         outside = new Room("fora da entrada principal da universidade");
         theatre = new Room("em um auditório");
-        pub = new Room("na cantina do campus");
-        lab = new Room("em um laboratório de informática");
-        office = new Room("na sala dos professores");
+        pub = new Room("na cantina do campus", table);
+        lab = new Room("em um laboratório de informática", chair);
+        office = new Room("na sala dos professores", tv);
         
         // initialise room exits
         outside.setExit("leste", theatre);
@@ -99,7 +105,10 @@ public class Game
             goRoom(command);
         else if (commandWord.equals("sair"))
             wantToQuit = quit(command);
-
+        else if(commandWord.equals("examinar"))
+            look();
+        else if(commandWord.equals("comer"))
+            toEat();
         return wantToQuit;
     }
 
@@ -116,7 +125,7 @@ public class Game
         System.out.println("pela universidade.");
         System.out.println();
         System.out.println("Seus comandos são:");
-        System.out.println(parser.getCommandList());
+        System.out.println(" " + parser.getCommandList());
     }
 
     /** 
@@ -162,7 +171,14 @@ public class Game
     }
     
     private void printLocationInfo(){
-        System.out.println("Você está " + currentRoom.getDescription());
-        System.out.println(currentRoom.getExitString());;
+        System.out.println(currentRoom.getLongDescription());
+    }
+
+    private void look() {
+        printLocationInfo();
+    }
+
+    private void toEat() {
+        System.out.println("Você comeu agora e não está mais com fome");
     }
 }
