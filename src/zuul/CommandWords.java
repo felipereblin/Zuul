@@ -11,6 +11,11 @@ public class CommandWords
     private static final String[] VALID_COMMANDS = {
         "ir_para", "sair", "ajuda"
     };
+    
+    public String getCommandList(){
+        String commands = String.join(" ", VALID_COMMANDS);
+        return commands;
+    }
 
     /**
      * Construtor - inicializa os comandos

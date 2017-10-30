@@ -34,12 +34,15 @@ public class Game
         office = new Room("na sala dos professores");
         
         // initialise room exits
-        outside.setExits(null, theatre, lab, pub);
-        theatre.setExits(null, null, null, outside);
-        pub.setExits(null, outside, null, null);
-        lab.setExits(outside, office, null, null);
-        office.setExits(null, null, null, lab);
-
+        outside.setExit("leste", theatre);
+        outside.setExit("sul", lab);
+        outside.setExit("oeste", pub);
+        theatre.setExit("oeste", outside);
+        pub.setExit("leste", outside);
+        lab.setExit("norte", outside);
+        lab.setExit("leste", office);
+        office.setExit("oeste", lab);
+        
         currentRoom = outside;  // Começa o jogo fora 
     }
 
@@ -113,7 +116,7 @@ public class Game
         System.out.println("pela universidade.");
         System.out.println();
         System.out.println("Seus comandos são:");
-        System.out.println("   ir_para sair ajuda");
+        System.out.println(parser.getCommandList());
     }
 
     /** 

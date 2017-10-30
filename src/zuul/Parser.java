@@ -54,4 +54,8 @@ public class Parser
             return new Command(null, word2); 
         }
     }
+    
+    public String getCommandList(){
+        return commands.getCommandList();
+    }
 }
